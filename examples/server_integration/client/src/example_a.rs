@@ -1,5 +1,5 @@
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use seed::{self, prelude::*, *};
 
 pub const TITLE: &str = "Example A";
@@ -57,8 +57,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 }
 
 async fn send_message(new_message: String) -> FetchResult<shared::SendMessageResponseBody> {
-    Request::new(get_request_url())
-        .method(Method::POST)
+    Request::post(get_request_url())
         .json(&shared::SendMessageRequestBody { text: new_message })?
         .send()
         .await?
@@ -87,7 +86,7 @@ pub fn view(model: &Model, intro: impl FnOnce(&str, &str) -> Vec<Node<Msg>>) -> 
 
 fn view_message(message: &Option<shared::SendMessageResponseBody>) -> Node<Msg> {
     let Some(message) = message else {
-        return empty![]
+        return empty![];
     };
     div![format!(
         r#"{}. message: "{}""#,

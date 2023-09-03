@@ -1,6 +1,6 @@
 //! Fetch POST example.
 
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use seed::{prelude::*, *};
 
 // ------ ------
@@ -38,8 +38,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
             let token = "YWxhZGRpbjpvcGVuc2VzYW1l";
             // Created outside async block because of lifetime reasons
             // (we can't use reference to `model.form` in async function).
-            let request = Request::new("/")
-                .method(Method::POST)
+            let request = Request::post("/")
                 .header("Accept-Language", "en")
                 .header("Authorization", &format!("Bearer {token}"))
                 .json(&model.form)

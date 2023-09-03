@@ -1,7 +1,7 @@
 #![allow(clippy::large_enum_variant, clippy::cognitive_complexity)]
 
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use graphql_client::{GraphQLQuery, Response as GQLResponse};
 use itertools::Itertools;
 use seed::{prelude::*, *};
@@ -36,8 +36,7 @@ where
     V: Serialize,
     T: for<'de> Deserialize<'de> + 'static,
 {
-    Request::new(API_URL)
-        .method(Method::POST)
+    Request::post(API_URL)
         .json(variables)?
         .send()
         .await?

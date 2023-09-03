@@ -16,7 +16,7 @@
 use apply::Apply;
 use futures::future::try_join_all;
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use seed::{prelude::*, *};
 use serde_wasm_bindgen as swb;
 
@@ -166,8 +166,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         }
         Msg::SendPushNotification => {
             orders.perform_cmd(async move {
-                let result = Request::new("http://127.0.0.1:8001/send_notification/")
-                    .method(Method::POST)
+                let result = Request::post("http://127.0.0.1:8001/send_notification/")
                     .mode(web_sys::RequestMode::Cors)
                     .send()
                     .await;
@@ -291,8 +290,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
                 Some(worker_data) => worker_data,
             };
 
-            let save_subscription = Request::new("http://127.0.0.1:8001/save_subscription/")
-                .method(Method::POST)
+            let save_subscription = Request::post("http://127.0.0.1:8001/save_subscription/")
                 .mode(web_sys::RequestMode::Cors)
                 .json(&push_subscription)
                 .expect("parse subscription to json")

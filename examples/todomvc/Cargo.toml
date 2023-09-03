@@ -9,9 +9,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 seed = { path = "../../", features = ["routing"] }
-serde = { version = "1.0.152", features = ["derive"] }
-uuid = { version = "1.3.0", features = ["serde", "v4"] }
-indexmap = { version = "1.9.2", features = ["serde-1"] }
+serde = { version = "1.0.188", features = ["derive"] }
+uuid = { version = "1.4.1", features = ["serde", "v4"] }
+indexmap = { version = "2.0.0", features = ["serde"] }
 enclose = "1.1.8"
-gloo-storage = "0.2.2"
-serde_json = "1.0.94"
+gloo-storage = "0.3.0"
+serde_json = "1.0.105"

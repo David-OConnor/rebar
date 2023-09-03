@@ -9,8 +9,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 seed = {path = "../../"}
-graphql_client = "0.10.0"
-serde = "1.0.152"
-itertools = "0.10.5"
-gloo-net = "0.2.6"
-gloo-console = "0.2.3"
+graphql_client = "0.13.0"
+serde = "1.0.188"
+itertools = "0.11.0"
+gloo-net = "0.4.0"
+gloo-console = "0.3.0"

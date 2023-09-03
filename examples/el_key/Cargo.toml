@@ -10,8 +10,8 @@ crate-type = ["cdylib"]
 [dependencies]
 seed = { path = "../../" }
 rand = { version = "0.8.5", features = ["small_rng"] }
-regex = "1.7.1"
-scarlet = "1.1.0"
+regex = "1.9.5"
+scarlet = "1.2.0"
 static_assertions = "1.1.0"
-gloo-console = "0.2.3"
-pulldown-cmark = "0.9.2"
+gloo-console = "0.3.0"
+pulldown-cmark = "0.9.3"

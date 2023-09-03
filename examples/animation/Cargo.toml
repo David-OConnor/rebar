@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 seed = {path = "../../"}
 rand = "0.8.5"
 # https://docs.rs/getrandom/0.2.0/getrandom/#webassembly-support
-getrandom = { version = "0.2.8", features = ["js"] }
+getrandom = { version = "0.2.10", features = ["js"] }

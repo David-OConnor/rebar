@@ -68,7 +68,7 @@ async fn send_notification_handler(db: Db) -> Result<impl warp::Reply, std::conv
     let subscription = db.lock().await;
     if let Some(subscription) = subscription.as_ref() {
         tracing::debug!("subscription: {:?}", subscription);
-        let mut builder = WebPushMessageBuilder::new(subscription).unwrap();
+        let mut builder = WebPushMessageBuilder::new(subscription);
 
         builder.set_payload(
             ContentEncoding::Aes128Gcm,
@@ -84,7 +84,7 @@ async fn send_notification_handler(db: Db) -> Result<impl warp::Reply, std::conv
         let signature = sig_builder.build().unwrap();
         builder.set_vapid_signature(signature);
 
-        let client = WebPushClient::new().unwrap();
+        let client = web_push::IsahcWebPushClient::new().unwrap();
 
         client
             .send(builder.build().expect("build web push builder"))

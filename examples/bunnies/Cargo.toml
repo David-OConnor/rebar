@@ -12,6 +12,6 @@ path = "src/empty_lib.rs"
 [dependencies]
 seed = { path = "../../" }
 rand = { version = "0.8.5", features = ["small_rng"] }
-nalgebra = "0.32.1"
-awsm_web = { version = "0.38.0", features = ["tick", "webgl", "loaders", "audio", "serde_iso"], default-features = false }
+nalgebra = "0.32.3"
+awsm_web = { version = "0.43.0", features = ["tick", "webgl", "loaders", "audio", "serde_iso"], default-features = false }
 shipyard = { version = "0.6.2", features = ["thread_local"], default-features = false }

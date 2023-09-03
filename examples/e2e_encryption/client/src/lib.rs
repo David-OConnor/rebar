@@ -1,6 +1,6 @@
 use crate::js_sys::Uint8Array;
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use seed::{prelude::*, *};
 use shared::{
     decrypt, encrypt,
@@ -21,15 +21,7 @@ type FetchResult<T> = Result<T, gloo_net::Error>;
 fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
     orders.perform_cmd(async {
         Msg::PublicKeyFetched(
-            async {
-                Request::new("api/public-key")
-                    .method(Method::POST)
-                    .send()
-                    .await?
-                    .binary()
-                    .await
-            }
-            .await,
+            async { Request::post("api/public-key").send().await?.binary().await }.await,
         )
     });
 
@@ -109,9 +101,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 
             model.registration_state = Some(state);
 
-            let request = Request::new("api/registration/step-1")
-                .method(Method::POST)
-                .binary(r1.to_bytes());
+            let request = Request::post("api/registration/step-1").binary(r1.to_bytes());
             orders.perform_cmd(async {
                 Msg::RegisterStep2(async { request.send().await?.binary().await }.await)
             });
@@ -128,9 +118,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
                 )
                 .expect("reg step 2");
 
-            let request = Request::new("api/registration/step-2")
-                .method(Method::POST)
-                .binary(r3.to_bytes());
+            let request = Request::post("api/registration/step-2").binary(r3.to_bytes());
             orders.perform_cmd(async {
                 Msg::Registered(async { request.send().await?.text().await }.await)
             });
@@ -151,9 +139,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 
             model.login_state = Some(state);
 
-            let request = Request::new("api/login/step-1")
-                .method(Method::POST)
-                .binary(l1.to_bytes());
+            let request = Request::post("api/login/step-1").binary(l1.to_bytes());
             orders.perform_cmd(async {
                 Msg::LoginStep2(async { request.send().await?.binary().await }.await)
             });
@@ -173,9 +159,7 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
             log!(format!("Shared secret: {shared_secret:?}"));
             model.shared_secret = Some(shared_secret);
 
-            let request = Request::new("api/login/step-2")
-                .method(Method::POST)
-                .binary(l3.to_bytes());
+            let request = Request::post("api/login/step-2").binary(l3.to_bytes());
             orders.perform_cmd(async {
                 Msg::LoggedIn(async { request.send().await?.text().await }.await)
             });
@@ -187,12 +171,10 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
             model.message_to_send = message;
         }
         Msg::SendMessage => {
-            let request = Request::new("api/echo")
-                .method(Method::POST)
-                .binary(encrypt(
-                    model.message_to_send.as_bytes(),
-                    model.shared_secret.as_ref().expect("shared key"),
-                ));
+            let request = Request::post("api/echo").binary(encrypt(
+                model.message_to_send.as_bytes(),
+                model.shared_secret.as_ref().expect("shared key"),
+            ));
 
             orders.perform_cmd(async {
                 Msg::MessageReceived(async { request.send().await?.binary().await }.await)

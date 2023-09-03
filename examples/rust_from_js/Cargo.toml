@@ -8,5 +8,5 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-gloo-console = "0.2.3"
+gloo-console = "0.3.0"
 seed = {path = "../../"}

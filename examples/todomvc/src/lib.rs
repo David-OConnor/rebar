@@ -72,17 +72,12 @@ struct EditingTodo {
 
 // ------ TodoFilter ------
 
-#[derive(Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Default, Copy, PartialEq, Eq, Serialize, Deserialize)]
 enum TodoFilter {
+    #[default]
     All,
     Active,
     Completed,
-}
-
-impl Default for TodoFilter {
-    fn default() -> TodoFilter {
-        TodoFilter::All
-    }
 }
 
 impl TodoFilter {

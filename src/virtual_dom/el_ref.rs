@@ -73,7 +73,9 @@ impl<E: Clone + JsCast> ElRef<E> {
     /// - The DOM element has the same type like `ElRef`.
     pub fn get(&self) -> Option<E> {
         // Has `node_ws` already been assigned by VDOM?
-        let Some(node_ws) = self.shared_node_ws.clone_inner() else { return None };
+        let Some(node_ws) = self.shared_node_ws.clone_inner() else {
+            return None;
+        };
         // Is `node_ws` in the current DOM?
         if !document().contains(Some(&node_ws)) {
             return None;

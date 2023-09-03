@@ -1,7 +1,7 @@
 #![allow(clippy::must_use_candidate)]
 
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use gloo_storage::{LocalStorage, Storage};
 use seed::{prelude::*, *};
 use serde::{Deserialize, Serialize};
@@ -127,9 +127,8 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::EmailChanged(email) => model.email = email,
         Msg::PasswordChanged(password) => model.password = password,
         Msg::LoginClicked => {
-            let request = Request::new(&format!("{API_URL}/users/login"))
-                .method(Method::POST)
-                .json(&LoginRequestBody {
+            let request =
+                Request::post(&format!("{API_URL}/users/login")).json(&LoginRequestBody {
                     email: &model.email,
                     password: &model.password,
                 });

@@ -9,6 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 seed = { path = "../../", features = ["routing"] }
-itertools = "0.10.5"
-futures = "0.3.26"
-gloo-console = "0.2.3"
+itertools = "0.11.0"
+futures = "0.3.28"
+gloo-console = "0.3.0"

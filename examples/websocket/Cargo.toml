@@ -14,9 +14,9 @@ path = "src/server.rs"
 
 [dependencies]
 # common
-serde = { version = "1.0.152", features = ["derive"] }
-serde_json = "1.0.94"
-rmp-serde = "1.1.1"
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.105"
+rmp-serde = "1.1.2"
 
 # server
 ws = { version = "0.9.2", optional = true }
@@ -24,7 +24,7 @@ ws = { version = "0.9.2", optional = true }
 #client
 seed = { path = "../../", optional = true }
 wasm-sockets = { version = "1", optional = true }
-gloo-console = { version = "0.2.3", optional = true }
+gloo-console = { version = "0.3.0", optional = true }
 
 [features]
 default = []

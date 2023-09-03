@@ -1,5 +1,5 @@
 use gloo_console::log;
-use gloo_net::http::{Method, Request};
+use gloo_net::http::Request;
 use seed::{prelude::*, *};
 use std::mem;
 use web_sys::{
@@ -117,8 +117,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 }
 
 async fn send_request(form: FormData) -> FetchResult<String> {
-    Request::new(get_request_url())
-        .method(Method::POST)
+    Request::post(get_request_url())
         .body(JsValue::from(form))
         .send()
         .await?

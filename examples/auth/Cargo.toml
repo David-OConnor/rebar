@@ -8,8 +8,8 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-gloo-console = "0.2.3"
-gloo-net = "0.2.6"
-gloo-storage = "0.2.2"
+gloo-console = "0.3.0"
+gloo-net = "0.4.0"
+gloo-storage = "0.3.0"
 seed = { path = "../../", features = ["routing"] }
-serde = "1.0.152"
+serde = "1.0.188"

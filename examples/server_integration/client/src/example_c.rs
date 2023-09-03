@@ -60,7 +60,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
         Msg::SendRequest => {
             let abort_signal = model.abort_controller.signal();
-            let request = Request::new(&get_request_url()).abort_signal(Some(&abort_signal));
+            let request = Request::get(&get_request_url()).abort_signal(Some(&abort_signal));
             model.status = Status::WaitingForResponse;
             model.fetch_result = None;
             orders.perform_cmd(async {
